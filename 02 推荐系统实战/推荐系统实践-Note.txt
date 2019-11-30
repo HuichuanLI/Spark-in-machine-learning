@@ -100,14 +100,31 @@
 
 =======================================================
 
-
-
-
-
-
-
-
-
+ALS协同过滤推荐算法在Spark MLlib机器学习库实现：
+	-a. Rating
+		存储：用户对物品的评价，三元组
+		class Rating(namedtuple("Rating", ["user", "product", "rating"]))
+		user、producet整型数据，通常使用ID表示
+		rating数值型数据
+	-b. ALS
+		就是算法的实现类，有两个函数，分别对显式反馈和隐式反馈评价：
+		- 显式反馈
+			 def train(cls, ratings, rank, iterations=5, lambda_=0.01, blocks=-1, nonnegative=False, seed=None)
+		- 隐式反馈
+			 def trainImplicit(cls, ratings, rank, iterations=5, lambda_=0.01, blocks=-1, alpha=0.01, nonnegative=False, seed=None)
+	-c. MatrixFactorizationModel
+		使用ALS算法针对数据集训练得到模型，本质就是获取两个因子矩阵：
+		- 用户特征因子矩阵
+			def userFeatures(self)
+		- 物品特征因子矩阵
+			def productFeatures(self)
+		- 预测用户对物品的评分
+			def predict(self, user, product)
+		- 推荐
+			- 为用户推荐物品
+				def recommendProducts(self, user, num)
+			- 为物品推荐用户
+				def recommendUsers(self, product, num)
 
 
 
