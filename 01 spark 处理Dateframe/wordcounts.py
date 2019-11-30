@@ -17,8 +17,12 @@ if __name__ == "__main__":
         .master('local[*]') \
         .getOrCreate()
     df = spark.read.csv('flights.csv', header=True)
+    print(type(df))
     df.printSchema()
     # DataFrame对象的show方法用于查看数据框的内容
     # 查看前5条记录
     # truncate 超过20个直接取消显示
     df.show(5, truncate=False)
+
+
+    # 统计
