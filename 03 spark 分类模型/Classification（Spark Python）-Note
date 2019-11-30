@@ -1,0 +1,76 @@
+
+Spark MLlib中分类和回归算法：
+	http://spark.apache.org/docs/2.2.0/mllib-classification-regression.html#classification-and-regression-rdd-based-api
+	- 分类基本算法：
+		pyspark.mllib.classification
+			- 朴素贝叶斯
+				NaiveBayes
+			- 支持向量机（优化：随机梯度下降）
+				SVMWithSGD
+			- 逻辑回归
+				LogisticRegressionWithSGD
+				// 从Spark 2.0开始，官方推荐使用BFGS方式优化LR算法
+				LogisticRegressionWithLBFGS
+				// 针对流式数据实时模型训练算法
+				StreamingLogisticRegressionWithSGD
+	- 树Tree相关分类算法：
+		pyspark.mllib.tree
+			- 决策树
+				DecisionTree
+			- 随机森林算法 - 集成学习算法-Bagging方式
+				RandomForest
+			- 梯度提升决策树算法 - 集成学习算法-Boosting方式
+				GradientBoostedTrees
+		Spark MLlib中从底层源码来看，无论是DT还是RF还是GBT算法，底层都是RF算法实现的。
+	- 分类算法的类别：
+		- 树相关的算法，既可以做二分类，又可以做多分类算法
+			numClasses：
+				Number of classes for classification
+		- 二分类
+			NaiveBayes
+			SVMWithSGD
+				Labels used in SVM should be {0, 1}
+			LogisticRegression
+				Labels used in Logistic Regression should be {0, 1, ..., k - 1}
+		- 多分类
+			NaiveBayes
+			LogisticRegression
+面试题：
+	梯度下降？随机梯度下降？为什么算法中最常见优化算法的方式呢？？
+
+
+=======================================================================
+监督学习算法：
+	数据集RDD[LabeledPoint]
+		标签向量 LabeledPoint = features: Vector + label: Float
+	类比：
+		RDD 类似 矩阵
+		数组 类比 Vector 
+	无论是矩阵还是向量分为两种类型：
+		- 稀疏类型
+			稀疏矩阵，稀疏向量
+		- 稠密类型
+			稠密矩阵，稠密向量
+
+StumbleUpon Evergreen 数据集：
+	分辨网页是暂时性（ephemeral）还是长青的（evergreen）
+
+
+=================================================================
+sex：
+	male，female，unknown
+如何将行性别分类特征数据转换为数值特征？？
+-a. 创建向量 -> 向量中元素个数为类别个数，初始值为0.0
+	Vector(0.0, 0.0, 0.0)
+		   male unknow female
+-b. 建立字典dic
+	male -> 0
+	female -> 2
+	unknow -> 1
+-c. 针对每个分类值转换
+	小明：male
+		Vector(1.0, 0.0, 0.0)
+	小红：
+		Vector(0.0, 0.0, 1.0)
+	泰国美女：
+		Vector(0.0, 1.0, 0.0)
