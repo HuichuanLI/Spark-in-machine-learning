@@ -3,7 +3,7 @@
 
 ## Spark-in-machine-learning
 
-Machine Learning Library [MLlib](https://spark.apache.org/docs/latest/ml-guide.html) Guide]
+Machine Learning Library [MLlib](https://spark.apache.org/docs/latest/ml-guide.html) Guide
 MLlib is Spark’s machine learning (ML) library. Its goal is to make practical machine learning scalable and easy. At a high level, it provides tools such as:
 
 ML Algorithms: common learning algorithms such as classification, regression, clustering, and collaborative filtering
