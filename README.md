@@ -17,8 +17,8 @@ Please feel free to contact me if you have any questions with this repo:)
 使用Pyspark 实现几个机器学习的例子：
 1. 基于ALS 推荐算法 [完成]
 2. 使用Spark的分类器 [完成]
-3. 使用Spark的回归器 
-4. 使用Spark的ML库
+3. 使用Spark的回归器  [完成]
+4. 使用Spark的ML库 [完成]
 
 如果对代码仓有任何问题，欢迎联系我：）
 
