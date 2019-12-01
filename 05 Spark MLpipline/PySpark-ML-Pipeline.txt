@@ -1,0 +1,38 @@
+
+Spark MLlib中算法使用：
+    基于Spark 中RDD数据结构存储实现算法库使用
+    -a. 推荐算法
+        ALS交替最小二乘法
+        MovieLens提供用户对电影评分数据
+    -b. 分类算法
+        LR、SVM、NB、DT、RF、GBT
+        Kaggle竞赛Stumbleupon数据集，二分类
+    -c. 回归算法
+        LR、Righ、Lasso、DT、RF、GBT
+        Kaggle竞赛BikeSharing出租次数预测
+    
+Announcement: DataFrame-based API is primary API
+    The primary Machine Learning API for Spark is now the DataFrame-based API in the spark.ml package。
+基于DataFrame实现机器学习库，几个重要的概念：
+    -a. DataFrame 
+        类似Pandas中dataframe，将算法所有的数据集存储在DataFrame数据结构中。
+        DataFrame = RDD + Schema(字段名称、字段类型)
+    -b. Estimator
+        模型学习器，就是算法，比如ALS，DecisionTree，将数据应用到模型学习器中会得到一个模型Model。
+        每个模型学习器中有个一个方法(训练模型）：
+            fit(dataframe) -> Model 
+    -c. Transformer
+        转换器，就是模型Model或者算法，比如ALSModel，将针对数据集中某一列或某几列数据生成预测另外一列新数据。
+        ALSModel.transform(dataframe)
+            userId,itemId  -> predictRating
+    -d. Parameters
+        封装算法训练时参数或者模型预测时参数，底层是字典Dic（Map集合），其中字典的Key就是参数名称，字典的Value就是参数的值。
+        比如：使用ALS模型学习器训练模型，设置参数：特征数rank和迭代次数iterations，可以使用Parameters组合封装设置。
+    -e. Pipeline
+        管道，Spark ML机器学习库从SK-Learn中借鉴
+        由很多Stage组成：
+            一个序列的Stages组成，每个Stage要么是转换器Estimator（模型），要么是模型学习器Estimator（算法）
+        本身来说：
+            Pipeline就是一个模型学习器，相当于算法，所以里面有一个fit函数，应用数据训练以后得到PipelineModel转换器，可以进行预测数据。
+        功能：
+            将某个机器学习应用中整个流程进行串联起来，方便部署测试使用。
