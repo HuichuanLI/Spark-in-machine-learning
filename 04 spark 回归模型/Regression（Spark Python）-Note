@@ -1,0 +1,22 @@
+	
+Spark MLlib中回归算法（基于RDD实现算法库：
+	-a. 线性回归算法相关：
+		pyspark.mllib.regression
+			LinearRegressionWithSGD
+				least squares regression
+			LassoWithSGD
+				L1-regularization
+				f(weights) = 1/(2n) ||A weights - y||^2  + regParam ||weights||_1
+			RidgeRegressionWithSGD
+				L2-regularization
+				 f(weights) = 1/(2n) ||A weights - y||^2 + regParam/2 ||weights||^2
+	-b. 树算法相关：
+		pyspark.mllib.tree
+			- 决策树
+				DecisionTree
+			- 随机森林算法 - 集成学习算法-Bagging方式
+				RandomForest
+			- 梯度提升决策树算法 - 集成学习算法-Boosting方式
+				GradientBoostedTrees
+		Spark MLlib中从底层源码来看，无论是DT还是RF还是GBT算法，底层都是RF算法实现的。
+
